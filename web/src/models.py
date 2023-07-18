@@ -46,9 +46,9 @@ class Book(Base):
     description: Mapped[str] = mapped_column(Text)
     price: Mapped[float] = mapped_column(Float(precision=2))
     author_id: Mapped[int] = mapped_column(ForeignKey('authors.id'))
-    author: Mapped['Author'] = relationship('Author', cascade='all, delete-orphan', back_populates='books')
+    author: Mapped['Author'] = relationship('Author')
     category_id: Mapped[int] = mapped_column(ForeignKey('categories.id'))
-    category: Mapped['Category'] = relationship('Category', cascade='all, delete-orphan', back_populates='books')
+    category: Mapped['Category'] = relationship('Category')
 
 
 class Cart(Base):
@@ -56,9 +56,9 @@ class Cart(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
-    user: Mapped['Category'] = relationship('User', cascade='all, delete-orphan', back_populates='cart')
+    user: Mapped['Category'] = relationship('User')
     book_id: Mapped[int] = mapped_column(ForeignKey('books.id'))
-    book: Mapped['Category'] = relationship('Book', cascade='all, delete-orphan', back_populates='cart')
+    book: Mapped['Category'] = relationship('Book')
 
 
 class Order(Base):
@@ -66,6 +66,6 @@ class Order(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
-    user: Mapped['Category'] = relationship('User', cascade='all, delete-orphan', back_populates='orders')
+    user: Mapped['Category'] = relationship('User')
     book_id: Mapped[int] = mapped_column(ForeignKey('books.id'))
-    book: Mapped['Category'] = relationship('Book', cascade='all, delete-orphan', back_populates='orders')
+    book: Mapped['Category'] = relationship('Book')
